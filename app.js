@@ -4,6 +4,10 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const loginRouter = require('./routes/login');
+const logoutRouter = require('./routes/logout');
 const clientesRoutes = require('./routes/clientes');
 const produtosRoutes = require('./routes/produtos');
 
@@ -28,5 +32,5 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
+    console.log(`✅ Servidor rodando em http://127.0.0.1:${PORT}`);
 });

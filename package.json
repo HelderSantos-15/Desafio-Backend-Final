@@ -4,7 +4,7 @@
   "description": "Desafio Backend para criação de uma API com clientes e produtos",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js",
     "lint": "eslint ."
@@ -36,10 +36,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HelderSantos-15/Desafio-Backend.git"
+    "url": "git+https://github.com/MatheusCarvalho-creat/Desafio_Caching.git"
   },
   "bugs": {
-    "url": "https://github.com/HelderSantos-15/Desafio-Backend/issues"
+    "url": "https://github.com/MatheusCarvalho-creat/Desafio_Caching.git"
   },
-  "homepage": "https://github.com/HelderSantos-15/Desafio-Backend#readme"
+  "homepage": "https://github.com/MatheusCarvalho-creat/Desafio_Caching.git"
 }
