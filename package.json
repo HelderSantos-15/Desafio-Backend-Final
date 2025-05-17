@@ -25,7 +25,8 @@
     "jade": "^0.29.0",
     "minimist": "^1.2.8",
     "morgan": "^1.10.0",
-    "mysql2": "^3.14.0"
+    "mysql2": "^3.14.0",
+    "node_cache": "^0.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",

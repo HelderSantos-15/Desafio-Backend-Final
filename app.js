@@ -13,6 +13,8 @@ const produtosRoutes = require('./routes/produtos');
 
 const app = express();
 
+//Adicionar um item ao cache com a chave 'chave' e o valor 'valor
+
 // Middlewares
 app.use(express.json());
 app.use(morgan('dev'));
@@ -32,5 +34,5 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`✅ Servidor rodando em http://127.0.0.1:${PORT}`);
+    console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
 });
