@@ -1,36 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const {
-    getClientes,
-    getClienteById,
-    addCliente,
-    updateCliente,
-    deleteCliente,
-} = require('../controllers/clientesController');
+const { getClientes, addCliente, updateCliente, deleteCliente } = require('../controllers/clientesController');
+const { cacheMiddleware } = require('../middlewares/cache'); // ✅ Importa o middleware
 
-const { validateName } = require('../middlewares/nomeMiddleware');
-const { validateFamilyName } = require('../middlewares/sobrenomeMiddleware');
-const { validateAge } = require('../middlewares/idadeMiddleware');
+router.get('/', cacheMiddleware, getClientes); // ✅ Aplica o cache aqui
 
-// 📌 Listar todos os clientes
-router.get('/', getClientes);
-
-// 📌 Buscar cliente por ID
-router.get('/:id', getClienteById);
-
-// 📌 Adicionar um novo cliente (com validação)
-router.post('/', validateName, validateFamilyName, validateAge, addCliente);
-
-// 📌 Atualizar um cliente pelo ID (com validação)
-router.put(
-    '/:id',
-    validateName,
-    validateFamilyName,
-    validateAge,
-    updateCliente,
-);
-
-// 📌 Deletar um cliente pelo ID
+router.post('/', addCliente);
+router.put('/:id', updateCliente);
 router.delete('/:id', deleteCliente);
 
 module.exports = router;

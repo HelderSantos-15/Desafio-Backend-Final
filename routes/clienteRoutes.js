@@ -1,11 +1,10 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const clienteController = require("../controllers/clienteController");
-const { cacheMiddleware } = require("../middlewares/cache");
+const { getClientes, addCliente, updateCliente, deleteCliente } = require('../controllers/clientesController');
+const { cacheMiddleware } = require('../middlewares/cache'); // ✅ certifique-se disso
 
-router.get("/", cacheMiddleware, clienteController.getAll);
-router.post("/", clienteController.create);
-router.put("/:id",clienteController.update);
-router.delete("/:id", clienteController.remove);
+// ⛔ ERRADO:
+router.get('/', getClientes);
 
-module.exports = router;
+// ✅ CERTO:
+router.get('/', cacheMiddleware, getClientes);
