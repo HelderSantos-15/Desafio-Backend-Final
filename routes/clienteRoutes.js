@@ -5,7 +5,7 @@ const { cacheMiddleware } = require("../middlewares/cache");
 
 router.get("/", cacheMiddleware, clienteController.getAll);
 router.post("/", clienteController.create);
-router.put("/:id",clienteController..update);
+router.put("/:id",clienteController.update);
 router.delete("/:id", clienteController.remove);
 
 module.exports = router;

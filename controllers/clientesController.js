@@ -1,6 +1,6 @@
 const clientesService = require('../services/clientesService');
 const clientesView = require('../views/clientesView');
-const invalidateClientesCache = require('../middlewares/cache');
+const { invalidateClientesCache} = require('../middlewares/cache');
 
 async function getClientes(req, res) {
     try {
@@ -45,6 +45,8 @@ async function addCliente(req, res) {
             email,
             idade,
         });
+
+        invalidateClientesCache(); // ✅ Invalida o cache após criação
         res.status(200).json({ message: 'Cliente cadastrado com sucesso!', id });
     } catch (error) {
         console.error('Erro ao cadastrar cliente:', error);
@@ -60,27 +62,6 @@ async function updateCliente(req, res) {
         return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
     }
 
-async function create(req, res){
-    // ... lógica de criação
-    await clienteModel.create(req.body);
-
-    invalidateClientesCache();
-    res.status(201).json({msg: "Cliente criado com sucesso"});
-}
-    async function update(req, res) {
-        await clienteModel.update(req.params.id, req.body);
-
-        invalidateClientesCache();
-        res.json({ msg: "Cliente atualizado"});
-    }
-
-    async function remove(req, res){
-        await clienteModel.delete(req.params.id);
-
-        invalidateClientesCache();
-        res.json({msg: "Cliente deletado"});
-    }
-
     try {
         const affectedRows = await clientesService.updateCliente(id, {
             nome,
@@ -93,6 +74,7 @@ async function create(req, res){
             return res.status(400).json({ error: 'Cliente não encontrado' });
         }
 
+        invalidateClientesCache(); // ✅ Invalida o cache após atualização
         res.status(200).json({ message: 'Cliente atualizado com sucesso!' });
     } catch (error) {
         console.error('Erro ao atualizar cliente:', error);
@@ -112,6 +94,7 @@ async function deleteCliente(req, res) {
             return res.status(400).json({ error: 'Cliente não encontrado' });
         }
 
+        invalidateClientesCache(); // ✅ Invalida o cache após exclusão
         res.status(200).json({ message: 'Cliente excluído com sucesso!' });
     } catch (error) {
         console.error('Erro ao excluir cliente:', error);
