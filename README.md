@@ -4,7 +4,7 @@ Desafio Backend para criaçao de uma API com clientes e produtos
 
 # Projeto Backend
 
-Este é um projeto de backend utilizando Node.js, Express e MySQL. O objetivo é criar uma API com operações CRUD para clientes e produtos.
+Este é um projeto de backend utilizando Node.js, Express e MySQL. O objetivo é criar uma API com operações CRUD para clientes e produtos. Além disso, esse projeto teve a implementação do cache.
 
 ## Estrutura do projeto
 
