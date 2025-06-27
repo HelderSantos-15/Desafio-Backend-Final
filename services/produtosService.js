@@ -1,16 +1,16 @@
-const createConnection = require('../configs/db');
+// services/produtosService.js
+const db = require('../configs/db'); // Agora 'db' é o seu pool de conexões
 
 // 📌 Buscar todos os produtos
 async function getProdutos() {
-    const connection = await createConnection(); // Cria a conexão com o banco de dados
-    const [rows] = await connection.execute('SELECT * FROM produtos');
+    // Usar 'db' (o pool) diretamente para executar a query
+    const [rows] = await db.execute('SELECT * FROM produtos'); // <-- LINHA CORRIGIDA
     return rows;
 }
 
 // 📌 Buscar um produto por ID
 async function getProdutoById(id) {
-    const connection = await createConnection(); // Cria a conexão com o banco de dados
-    const [rows] = await connection.execute(
+    const [rows] = await db.execute(
         'SELECT * FROM produtos WHERE id = ?',
         [id],
     );
@@ -18,29 +18,26 @@ async function getProdutoById(id) {
 }
 
 // 📌 Adicionar um novo produto
-async function addProduto({ nome, descricao, preco, quantidade }) {
-    const connection = await createConnection(); // Cria a conexão com o banco de dados
-    const [result] = await connection.execute(
-        'INSERT INTO produtos (nome, descricao, preco, quantidade) VALUES (?, ?, ?, ?)',
-        [nome, descricao, preco, quantidade],
+async function addProduto({ nome, descricao, preco, data_atualizado }) {
+    const [result] = await db.execute( // <-- LINHA CORRIGIDA
+        'INSERT INTO produtos (nome, descricao, preco, data_atualizado) VALUES (?, ?, ?, ?)',
+        [nome, descricao, preco, data_atualizado],
     );
     return result.insertId;
 }
 
 // 📌 Atualizar um produto
-async function updateProduto(id, { nome, descricao, preco, quantidade }) {
-    const connection = await createConnection(); // Cria a conexão com o banco de dados
-    const [result] = await connection.execute(
-        'UPDATE produtos SET nome = ?, descricao = ?, preco = ?, quantidade = ? WHERE id = ?',
-        [nome, descricao, preco, quantidade, id],
+async function updateProduto(id, { nome, descricao, preco, data_atualizado }) {
+    const [result] = await db.execute( // <-- LINHA CORRIGIDA
+        'UPDATE produtos SET nome = ?, descricao = ?, preco = ?, data_atualizado = ? WHERE id = ?',
+        [nome, descricao, preco, data_atualizado, id],
     );
     return result.affectedRows;
 }
 
 // 📌 Deletar um produto
 async function deleteProduto(id) {
-    const connection = await createConnection(); // Cria a conexão com o banco de dados
-    const [result] = await connection.execute(
+    const [result] = await db.execute( // <-- LINHA CORRIGIDA
         'DELETE FROM produtos WHERE id = ?',
         [id],
     );
